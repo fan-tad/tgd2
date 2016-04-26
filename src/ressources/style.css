@@ -1,0 +1,106 @@
+.btn
+{
+    -fx-background-color: #e63854;
+    -fx-font-weight: 700;
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-alignment: CENTER;
+    -fx-background-radius: 0,0,0,0;
+}
+
+.btn:hover
+{
+    -fx-text-fill: #e63854;
+    -fx-background-color: white;
+}
+
+.menu
+{
+    -fx-background-color: #ececf7;
+}
+
+
+.texte
+{
+    -fx-font-family: 'Ave Fedan';
+    -fx-fill: #3d4158;
+    -fx-font-weight: 700;
+    -fx-font-size: 25px;
+}
+
+.jeu
+{
+    -fx-background-color: #3d4158;
+    
+}
+
+.case
+{
+    -fx-text-fill: #E1F5C4;
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+    -fx-background-color: #363636;
+    -fx-background-radius: 0,0,0,0;
+    -fx-max-height: 40;
+    -fx-min-height: 40;
+    -fx-max-width: 40;
+    -fx-min-width: 40;
+    -fx-translate-X: 160;  
+    -fx-translate-Y: 100;  
+}
+
+.case:hover
+{
+    -fx-background-color: #E1F5C4;
+    -fx-text-fill: #363636;
+    -fx-font-weight: 700;
+}
+
+.case-uncovered
+{
+
+    -fx-background-color: #e63854;
+    -fx-text-fill: #363636;
+}
+
+.looser
+{
+    -fx-font-weight: 700;
+    -fx-fill: #E1F5C4;
+    -fx-text-alignment: center;
+    -fx-font-size: 25px;
+}
+
+.timer
+{
+    -fx-font-weight: 700;
+    -fx-fill: #e63854;
+    -fx-font-size: 25px;
+    -fx-translate-X: 175px;
+    -fx-translate-Y: 12px;
+}
+
+.bmb
+{
+    -fx-font-weight: 700;
+    -fx-fill: #e63854;
+    -fx-font-size: 25px;
+    -fx-translate-X: 335px;
+    -fx-translate-Y: 12px;
+}
+
+.clock
+{
+    -fx-translate-X: 160px;
+    -fx-translate-Y: 10px;
+}
+
+.bomb
+{
+    -fx-translate-X: 420px;
+}
+
+.border
+{
+    -fx-background-color: #3d4158;
+}
