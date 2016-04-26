@@ -58,10 +58,10 @@
     -fx-font-weight: 700;
     -fx-background-color: #363636;
     -fx-background-radius: 0,0,0,0;
-    -fx-max-height: 40;
-    -fx-min-height: 40;
-    -fx-max-width: 40;
-    -fx-min-width: 40;
+    -fx-max-height: 30;
+    -fx-min-height: 30;
+    -fx-max-width: 30;
+    -fx-min-width: 30;
     -fx-translate-X: 160;  
     -fx-translate-Y: 100;  
 }

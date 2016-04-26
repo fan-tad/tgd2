@@ -452,8 +452,8 @@ public class Demineur implements Observer{
             ImageView ivf = new ImageView();
             Image imagef = new Image("ressources/red_flag.png");
             ivf.setImage(imagef);
-            ivf.setFitWidth(30);
-            ivf.setFitHeight(30);
+            ivf.setFitWidth(20);
+            ivf.setFitHeight(25);
             ivf.setPreserveRatio(false);
             plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(ivf);
         }
@@ -468,8 +468,8 @@ public class Demineur implements Observer{
         ImageView ivb = new ImageView();
         Image imageb = new Image("ressources/bomb2.png");
         ivb.setImage(imageb);
-        ivb.setFitWidth(30);
-        ivb.setFitHeight(35);
+        ivb.setFitWidth(20);
+        ivb.setFitHeight(25);
         ivb.setPreserveRatio(false);
         plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(ivb);
         
