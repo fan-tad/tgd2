@@ -465,15 +465,17 @@ public class Demineur implements Observer{
     
     @Override
     public void updateBombe(int longueur, int largeur){
-        
-            ImageView ivb = new ImageView();
-            Image imageb = new Image("ressources/bomb2.png");
-            ivb.setImage(imageb);
-            ivb.setFitWidth(30);
-            ivb.setFitHeight(35);
-            ivb.setPreserveRatio(false);
-            plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(ivb);
-        
+        ImageView ivb = new ImageView();
+        Image imageb = new Image("ressources/bomb2.png");
+        ivb.setImage(imageb);
+        ivb.setFitWidth(30);
+        ivb.setFitHeight(35);
+        ivb.setPreserveRatio(false);
+        plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(ivb);
+        rootJ.getChildren().clear();
+        C.m.getJeu().getP().reinitialise();
+        ImageView ivS = new ImageView();
+        Text looser = new Text();
     }
     /**
      * @return the ticker
