@@ -207,8 +207,8 @@ public class Demineur implements Observer{
                 primaryStage.setScene(sceneJ);
                 primaryStage.show();
                 String pl = "";
-
                 pl += C.m.getJeu().getP().toStrings();
+                System.out.println(pl);
 
 
             }
@@ -397,7 +397,7 @@ public class Demineur implements Observer{
                 ivS.setPreserveRatio(true);
                 ivS.setSmooth(true);
                 ivS.setCache(true);
-                looser.setText("Vous avez gagnÃ©! \n Voulez-vous rejouer?");
+                looser.setText("Vous avez gagné! \n Voulez-vous rejouer?");
             }
             looser.getStyleClass().add("looser");
             rootJ.getChildren().addAll(ivS, looser, btnQuitter, btnRetour);
