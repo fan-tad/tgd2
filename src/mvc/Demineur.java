@@ -1,14 +1,10 @@
 package mvc;
  
-import demineur.Modele.Case;
-import java.awt.event.ActionListener;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.Observable;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
-import static javafx.application.Application.launch;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,7 +17,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -32,7 +27,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
-import javax.swing.JButton;
 
 /**
  *
@@ -45,8 +39,12 @@ public class Demineur implements Observer{
     private Timeline ticker ;
     BorderPane border = new BorderPane();
     AnchorPane root = new AnchorPane();
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    final int width = (int) screenSize.getWidth();
+    final int height = (int) screenSize.getHeight();
     Scene scene = new Scene(root, 500, 600);
     GridPane rootJ = new GridPane ();
+    char mode= 'E';
     
     public Demineur(Controleur C, Stage primaryStage){
         this.C = C;
@@ -56,8 +54,7 @@ public class Demineur implements Observer{
     
     
    // @Override
-    public void start(Stage primaryStage) {
-        plateau = new Button[C.m.getJeu().getP().getLongueur()*C.m.getJeu().getP().getLargeur()];
+    public void start(Stage primaryStage) {        
         Text t = new Text("Bienvenue sur Demineur");
         Button btn = new Button();
         btn.setText("Jouer");
@@ -70,7 +67,7 @@ public class Demineur implements Observer{
         iv.setCache(true);
         Button btnM = new Button();
         btnM.setText("Mode");
-        
+
         
         Button btnQ = new Button();
         btnQ.setText("Quitter");
@@ -106,8 +103,9 @@ public class Demineur implements Observer{
             
             @Override
             public void handle(ActionEvent event) {
-
                 
+                C.m.initialiseJeu(mode);
+                plateau = new Button[C.m.getJeu().getP().getLongueur()*C.m.getJeu().getP().getLargeur()];
                 int largeur = C.m.getJeu().getP().getLargeur();
                 int longueur = C.m.getJeu().getP().getLongueur();
                 int bombe = C.m.getJeu().getP().getNbBombe();
@@ -155,7 +153,7 @@ public class Demineur implements Observer{
                 time_bo.getChildren().add(bmb);
             
                 border.setCenter(rootJ);
-                Scene sceneJ = new Scene(border, 700, 600);
+                Scene sceneJ = new Scene(border, width, height);
                 sceneJ.getStylesheets().add("ressources/style.css");
                 rootJ.getStyleClass().add("jeu");
                 rootJ.setVgap(2);
@@ -313,6 +311,13 @@ public class Demineur implements Observer{
                 Type.setValue("Rectangulaire");               
                 Type.getStyleClass().add("combo-box2");
                 
+                Type.valueProperty().addListener(new ChangeListener<String>() {
+                    @Override 
+                    public void changed(ObservableValue ov, String t, String t1) {
+                        System.out.println(Type.getValue());
+                    }
+                });
+                
                 ObservableList mod = FXCollections.observableArrayList();
                 ComboBox Mode = new ComboBox();
                 Text label_type = new Text("Type");
@@ -324,6 +329,15 @@ public class Demineur implements Observer{
                 Mode.setCellFactory(ComboBoxListCell.forListView(mod));
                 Mode.setValue("Debutant");
                 Mode.getStyleClass().add("combo-box1");
+                
+                Mode.valueProperty().addListener(new ChangeListener<String>() {
+                    @Override 
+                    public void changed(ObservableValue ov, String t, String t1) {
+                        System.out.println(Mode.getValue());
+                    }
+                });
+                
+                
                 Button btnR = new Button("Retour");
                 Button btnV = new Button("Valider");
                 btnR.getStyleClass().add("btnR");
@@ -336,16 +350,28 @@ public class Demineur implements Observer{
                         primaryStage.setScene(scene);
                     }
                 });
+                
+                
                 btnV.getStyleClass().add("btnV");
                 btnV.setOnAction(new EventHandler<ActionEvent>() 
                 {
                     @Override
                     public void handle(ActionEvent event) 
                     {
+                        if(Mode.getValue() == "Debutant")
+                            mode = 'E';
+                        else if(Mode.getValue() == "Intermediaire")
+                            mode = 'M';
+                        else if(Mode.getValue() == "Malade Mental")
+                            mode = 'H';
+                        else{
+                             //POP-UP VEUILLEZ REMPLIR LES CHAMPS SVP 
+                        }
                         primaryStage.setTitle("Demineur");
                         primaryStage.setScene(scene);
                     }
                 });
+                
                 
                 rootM.getChildren().addAll(label_type, Type, Mode, label_mode, btnR, btnV);
                 primaryStage.setTitle("Mode");
