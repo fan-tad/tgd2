@@ -47,17 +47,17 @@ public class Demineur implements Observer{
     AnchorPane root = new AnchorPane();
     Scene scene = new Scene(root, 500, 600);
     GridPane rootJ = new GridPane ();
-    Button []plateau= new Button[81];
+    
     public Demineur(Controleur C, Stage primaryStage){
         this.C = C;
         this.start(primaryStage);
     }
-    
+    Button []plateau;
     
     
    // @Override
     public void start(Stage primaryStage) {
-        
+        plateau = new Button[C.m.getJeu().getP().getLongueur()*C.m.getJeu().getP().getLargeur()];
         Text t = new Text("Bienvenue sur Demineur");
         Button btn = new Button();
         btn.setText("Jouer");
@@ -472,10 +472,19 @@ public class Demineur implements Observer{
         ivb.setFitHeight(35);
         ivb.setPreserveRatio(false);
         plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(ivb);
-        rootJ.getChildren().clear();
-        C.m.getJeu().getP().reinitialise();
-        ImageView ivS = new ImageView();
-        Text looser = new Text();
+        
+        Timeline attend = new Timeline();
+        attend.getKeyFrames().add(new KeyFrame(Duration.seconds(2), (ActionEvent e) -> {
+            rootJ.getChildren().clear();
+            C.m.getJeu().getP().reinitialise();
+            ImageView ivS = new ImageView();
+            Text looser = new Text();
+
+        }));
+        attend.play();
+        
+        
+        
     }
     /**
      * @return the ticker

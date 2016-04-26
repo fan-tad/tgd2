@@ -24,11 +24,19 @@ public class Modele extends Observable{
     public void jouerDemineur(int longueur, int largeur) {
         if(!this.getJeu().isJeuFini()){
             if(!this.jeu.getP().getEtatIdPlateau()[longueur][largeur].isDrapeau()){
-                if(getJeu().getP().appliquerCoup(longueur, largeur).getBombe()){
+                if(jeu.getP().appliquerCoup(longueur, largeur).getBombe()){
                     System.out.println("normalement fini");
                     this.getJeu().setJeuFini(true);
                     getJeu().setPlayerMort(true);
-                    notifyBombe(longueur,largeur);
+                    for(int i = 0; i<jeu.getP().getLongueur();i++){
+                        for(int j = 0; j<jeu.getP().getLargeur();j++){
+                            if(jeu.getP().getEtatIdPlateau()[i][j].getBombe()){
+                                jeu.getP().getEtatIdPlateau()[i][j].setDevoilee(true);
+                                notifyBombe(i,j);
+                            }
+                        }
+                    }
+                    
                 }
                 getJeu().getP().devoilementVide(getJeu().getP().getEtatIdPlateau()[longueur][largeur]);
                 if(getJeu().getP().getNbNonDevoilee() == getJeu().getP().getNbBombe()){
