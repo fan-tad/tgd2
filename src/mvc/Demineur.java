@@ -37,7 +37,6 @@ public class Demineur implements Observer{
     private Controleur C;
     private Stage primaryStage;
     private Timeline ticker ;
-    BorderPane border = new BorderPane();
     AnchorPane root = new AnchorPane();
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     final int width = (int) screenSize.getWidth();
@@ -45,6 +44,8 @@ public class Demineur implements Observer{
     Scene scene = new Scene(root, 500, 600);
     GridPane rootJ = new GridPane ();
     char mode= 'E';
+    Button btnQuitter;
+    Button btnRetour;
     
     public Demineur(Controleur C, Stage primaryStage){
         this.C = C;
@@ -103,6 +104,7 @@ public class Demineur implements Observer{
             
             @Override
             public void handle(ActionEvent event) {
+                BorderPane border = new BorderPane();
                 
                 C.m.initialiseJeu(mode);
                 plateau = new Button[C.m.getJeu().getP().getLongueur()*C.m.getJeu().getP().getLargeur()];
@@ -158,7 +160,7 @@ public class Demineur implements Observer{
                 rootJ.getStyleClass().add("jeu");
                 rootJ.setVgap(2);
                 rootJ.setHgap(2); 
-                
+                rootJ.getChildren().removeAll();
                 
                 for(int i=0; i<longueur; i++){
                     for(int j=0; j<largeur; j++){
@@ -280,6 +282,24 @@ public class Demineur implements Observer{
                                     }
                                 }
                             }); */
+                            
+                            btnQuitter = new Button();
+                            btnQuitter.setText("NON");
+                            btnQuitter.getStyleClass().add("btn");
+                            
+                            btnQuitter.setOnAction(new EventHandler<ActionEvent>() 
+                            {
+                                @Override
+                                public void handle(ActionEvent event) 
+                                {
+                                    primaryStage.close();
+                                }
+                            });
+                            
+                            btnRetour = new Button();
+                            btnRetour.setText("OUI");
+                            btnRetour.getStyleClass().add("btn");
+                            C.OuiBouton(btnRetour, border, scene, primaryStage); 
                         
                     }
                 }
@@ -456,20 +476,10 @@ public class Demineur implements Observer{
         plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(ivb);
         ImageView ivS = new ImageView();
         Text looser = new Text();
-        Button btnQ = new Button();
-        btnQ.setText("NON");
-        btnQ.getStyleClass().add("btn");
-        C.NonBouton(btnQ, primaryStage);
-
-        Button btnR = new Button();
-        btnR.setText("OUI");
-        btnR.getStyleClass().add("btn");
-        C.OuiBouton(btnR, border, scene, primaryStage); 
         Timeline attend = new Timeline();
         attend.getKeyFrames().add(new KeyFrame(Duration.seconds(2), (ActionEvent e) -> {
             rootJ.getChildren().clear();
             C.m.getJeu().getP().reinitialise();
-            
             if(mort){
                 Image imageS = new Image("ressources/skull.png");
                 ivS.setImage(imageS);
@@ -490,20 +500,15 @@ public class Demineur implements Observer{
                 looser.setText("Vous avez gagnÃ©! \n Voulez-vous rejouer?");
             }
             looser.getStyleClass().add("looser");
-
-            
-            rootJ.getChildren().addAll(ivS, looser, btnQ, btnR);
+            rootJ.getChildren().addAll(ivS, looser, btnQuitter, btnRetour);
             rootJ.setPadding(new Insets(20,0,0,150)); 
             rootJ.setConstraints(looser, 3, 5);
             rootJ.setConstraints(ivS, 2, 5);
-            rootJ.setConstraints(btnQ, 3, 25);
-            rootJ.setConstraints(btnR, 2, 25);
-            
+            rootJ.setConstraints(btnQuitter, 3, 25);
+            rootJ.setConstraints(btnRetour, 2, 25);
+                    
         }));
-        attend.play();
-        
-        
-        
+        attend.play();         
     }
     /**
      * @return the ticker
@@ -517,6 +522,20 @@ public class Demineur implements Observer{
      */
     public void setTicker(Timeline ticker) {
         this.ticker = ticker;
+    }
+
+    /**
+     * @return the primaryStage
+     */
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    /**
+     * @param primaryStage the primaryStage to set
+     */
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 
 

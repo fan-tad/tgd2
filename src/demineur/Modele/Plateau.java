@@ -47,6 +47,7 @@ public abstract class Plateau {
         initialise();
         ajouterBombe();
         ajoutNombre();
+        this.NbNonDevoilee = this.longueur * this.largeur;
     }
 
     public String retourChar(int longueur, int largeur){
