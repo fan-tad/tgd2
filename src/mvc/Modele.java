@@ -97,7 +97,7 @@ public class Modele extends Observable{
     
     public void notifyBombe(int longueur, int largeur) {
         for(Observer obs : listObserver)
-            obs.updateCase(longueur, largeur);
+            obs.updateBombe(longueur, largeur);
     }
     
     

@@ -457,23 +457,23 @@ public class Demineur implements Observer{
             ivf.setPreserveRatio(false);
             plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(ivf);
         }
-        /*else if(C.m.getPl().getEtatIdPlateau()[longueur][largeur].getBombe()){
-            if(C.m.getPl().getEtatIdPlateau()[longueur][largeur].isDevoilee()){
-                ImageView ivb = new ImageView();
-                Image imageb = new Image("ressources/bomb2.png");
-                ivb.setImage(imageb);
-                ivb.setFitWidth(30);
-                ivb.setFitHeight(35);
-                ivb.setPreserveRatio(false);
-                plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(ivb);
-            }
-        }*/
         else{
-           System.out.println("dev false");
-           //if(C.m.getPl().getEtatIdPlateau()[longueur][largeur].isDevoilee()){
-                plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(null);
-           //}
+            System.out.println("dev false");
+            plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(null);
         }
+    }
+    
+    @Override
+    public void updateBombe(int longueur, int largeur){
+        
+            ImageView ivb = new ImageView();
+            Image imageb = new Image("ressources/bomb2.png");
+            ivb.setImage(imageb);
+            ivb.setFitWidth(30);
+            ivb.setFitHeight(35);
+            ivb.setPreserveRatio(false);
+            plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(ivb);
+        
     }
     /**
      * @return the ticker

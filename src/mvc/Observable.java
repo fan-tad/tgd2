@@ -14,5 +14,6 @@ public interface Observable {
     public void removeObserver();
     public void notifyObserver(String str);
     public void notifyObserver(Boolean fini);
-    public void notifyFlag(int longueur, int largeur); 
+    public void notifyFlag(int longueur, int largeur);
+    public void notifyBombe(int longueur, int largeur); 
 }

@@ -12,6 +12,6 @@ package mvc;
 public interface Observer {
     public void update(String str);
     public void update(Boolean fini);
-    //public void updateCase(Boolean fini);
+    public void updateBombe(int x, int y);
     public void updateCase(int x, int y);
 }
