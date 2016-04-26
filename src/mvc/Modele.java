@@ -36,7 +36,6 @@ public class Modele extends Observable{
                             }
                         }
                     }
-                    
                 }
                 getJeu().getP().devoilementVide(getJeu().getP().getEtatIdPlateau()[longueur][largeur]);
                 if(getJeu().getP().getNbNonDevoilee() == getJeu().getP().getNbBombe()){
