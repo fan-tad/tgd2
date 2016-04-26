@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Modele extends Observable{
     
     private Plateau pl;
-    private JeuDemineur jeu = new JeuDemineur('E');
+    private JeuDemineur jeu = new JeuDemineur('H');
     private String value = "";
     private int index, longueur, largeur;
     private ArrayList<Observer> listObserver = new ArrayList<Observer>();  
