@@ -423,51 +423,7 @@ public class Demineur implements Observer{
         }
         else{
             this.ticker.stop();
-            /*rootJ.getChildren().clear();
-            C.m.getJeu().getP().reinitialise();
-            ImageView ivS = new ImageView();
-            Text looser = new Text();
-
-            if(C.m.getJeu().isPlayerMort())
-            {
-                Image imageS = new Image("ressources/skull.png");
-                ivS.setImage(imageS);
-                ivS.setFitWidth(200);
-                ivS.setPreserveRatio(true);
-                ivS.setSmooth(true);
-                ivS.setCache(true);
-                looser.setText("Vous avez perdu! \n Voulez-vous rejouer?");
-            }
-            else
-            {
-                getTicker().stop();
-                Image imageS = new Image("ressources/victory.png");
-                ivS.setImage(imageS);
-                ivS.setFitWidth(200);
-                ivS.setPreserveRatio(true);
-                ivS.setSmooth(true);
-                ivS.setCache(true);
-                looser.setText("Vous avez gagné! \n Voulez-vous rejouer?");
-            }
-            looser.getStyleClass().add("looser");
-
-            Button btnQ = new Button();
-            btnQ.setText("NON");
-            btnQ.getStyleClass().add("btn");
-            C.NonBouton(btnQ, primaryStage);
-
-            Button btnR = new Button();
-            btnR.setText("OUI");
-            btnR.getStyleClass().add("btn");
-            C.OuiBouton(btnR, border, scene, primaryStage); 
-            C.m.getJeu().setJeuFini(false);
-            C.m.getJeu().getP().setNbNonDevoilee(C.m.getJeu().getP().getLongueur() * C.m.getJeu().getP().getLargeur());
-            rootJ.getChildren().addAll(ivS, looser, btnQ, btnR);
-            rootJ.setPadding(new Insets(20,0,0,150)); 
-            rootJ.setConstraints(looser, 3, 5);
-            rootJ.setConstraints(ivS, 2, 5);
-            rootJ.setConstraints(btnQ, 3, 25);
-            rootJ.setConstraints(btnR, 2, 25); */
+            
         }
     }
     
@@ -490,7 +446,7 @@ public class Demineur implements Observer{
     }
     
     @Override
-    public void updateBombe(int longueur, int largeur){
+    public void updateBombe(int longueur, int largeur, boolean mort){
         ImageView ivb = new ImageView();
         Image imageb = new Image("ressources/bomb2.png");
         ivb.setImage(imageb);
@@ -498,14 +454,51 @@ public class Demineur implements Observer{
         ivb.setFitHeight(25);
         ivb.setPreserveRatio(false);
         plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(ivb);
-        
+        ImageView ivS = new ImageView();
+        Text looser = new Text();
+        Button btnQ = new Button();
+        btnQ.setText("NON");
+        btnQ.getStyleClass().add("btn");
+        C.NonBouton(btnQ, primaryStage);
+
+        Button btnR = new Button();
+        btnR.setText("OUI");
+        btnR.getStyleClass().add("btn");
+        C.OuiBouton(btnR, border, scene, primaryStage); 
         Timeline attend = new Timeline();
         attend.getKeyFrames().add(new KeyFrame(Duration.seconds(2), (ActionEvent e) -> {
             rootJ.getChildren().clear();
             C.m.getJeu().getP().reinitialise();
-            ImageView ivS = new ImageView();
-            Text looser = new Text();
+            
+            if(mort){
+                Image imageS = new Image("ressources/skull.png");
+                ivS.setImage(imageS);
+                ivS.setFitWidth(200);
+                ivS.setPreserveRatio(true);
+                ivS.setSmooth(true);
+                ivS.setCache(true);
+                looser.setText("Vous avez perdu! \n Voulez-vous rejouer?");
+            }
+            else
+            {
+                Image imageS = new Image("ressources/victory.png");
+                ivS.setImage(imageS);
+                ivS.setFitWidth(200);
+                ivS.setPreserveRatio(true);
+                ivS.setSmooth(true);
+                ivS.setCache(true);
+                looser.setText("Vous avez gagnÃ©! \n Voulez-vous rejouer?");
+            }
+            looser.getStyleClass().add("looser");
 
+            
+            rootJ.getChildren().addAll(ivS, looser, btnQ, btnR);
+            rootJ.setPadding(new Insets(20,0,0,150)); 
+            rootJ.setConstraints(looser, 3, 5);
+            rootJ.setConstraints(ivS, 2, 5);
+            rootJ.setConstraints(btnQ, 3, 25);
+            rootJ.setConstraints(btnR, 2, 25);
+            
         }));
         attend.play();
         

@@ -26,7 +26,7 @@ public class Modele extends Observable{
         jeu = new JeuDemineur(mode);
     }
     
-    private ArrayList<Observer> listObserver = new ArrayList<Observer>();  
+     private ArrayList<Observer> listObserver = new ArrayList<Observer>();  
     public void jouerDemineur(int longueur, int largeur) {
         if(!this.getJeu().isJeuFini()){
             if(!this.jeu.getP().getEtatIdPlateau()[longueur][largeur].isDrapeau()){
@@ -38,7 +38,7 @@ public class Modele extends Observable{
                         for(int j = 0; j<jeu.getP().getLargeur();j++){
                             if(jeu.getP().getEtatIdPlateau()[i][j].getBombe()){
                                 jeu.getP().getEtatIdPlateau()[i][j].setDevoilee(true);
-                                notifyBombe(i,j);
+                                notifyBombe(i,j,true);
                             }
                         }
                     }
@@ -47,14 +47,14 @@ public class Modele extends Observable{
                 if(getJeu().getP().getNbNonDevoilee() == getJeu().getP().getNbBombe()){
                     getJeu().setJeuFini(true);
                     getJeu().setPlayerMort(false);
-                    //notifyObserver(true); 
+                    notifyBombe(longueur,largeur,false);
                 }
                 setPl(getJeu().getP());
                 setValue(getJeu().getP().retourChar(longueur, largeur));
                 setLongueur(longueur);
                 setLargeur(largeur);
 
-                // notification de la vue, suite à la mise à jour du champ lastValue
+                // notification de la vue, suite Ã  la mise Ã  jour du champ lastValue
                 setChanged();
                 notifyObserver(this.getValue());
                 //notifyObservers();
@@ -108,9 +108,9 @@ public class Modele extends Observable{
             obs.updateCase(longueur, largeur);
     }
     
-    public void notifyBombe(int longueur, int largeur) {
+    public void notifyBombe(int longueur, int largeur, Boolean mort) {
         for(Observer obs : listObserver)
-            obs.updateBombe(longueur, largeur);
+            obs.updateBombe(longueur, largeur, mort);
     }
     
     
