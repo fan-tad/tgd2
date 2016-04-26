@@ -31,7 +31,6 @@ public class Modele extends Observable{
         if(!this.getJeu().isJeuFini()){
             if(!this.jeu.getP().getEtatIdPlateau()[longueur][largeur].isDrapeau()){
                 if(jeu.getP().appliquerCoup(longueur, largeur).getBombe()){
-                    System.out.println("normalement fini");
                     this.getJeu().setJeuFini(true);
                     getJeu().setPlayerMort(true);
                     for(int i = 0; i<jeu.getP().getLongueur();i++){
@@ -56,7 +55,7 @@ public class Modele extends Observable{
 
                 // notification de la vue, suite Ã  la mise Ã  jour du champ lastValue
                 setChanged();
-                notifyObserver(this.getValue());
+                notifyObserver();
                 //notifyObservers();
             }    
         }   
@@ -64,27 +63,25 @@ public class Modele extends Observable{
     
     public void JeuCommence(){
         this.jeu.setJeuCommence(true);
+        setChanged();
         notifyObserver(true);
     }
     
     public void JeuFini(){
         if(this.jeu.isJeuFini()){
+            setChanged();
             notifyObserver(false);
-            System.out.println("Jeu fini2!!!!!!!!!");
-        }
-        else{
-            System.out.println("Jeu non fini2!!!!!!!!!");
         }
     }
     public void ajoutDrapeau(int longueur, int largeur){
         if(!this.getJeu().isJeuFini()){
             jeu.getP().getEtatIdPlateau()[longueur][largeur].setDrapeau();
             setChanged();
-            System.out.println("Devoilee");
-            System.out.println("Jeu non fini!!!!!!!!!");
-            notifyFlag(longueur, largeur);
+            if(jeu.getP().getEtatIdPlateau()[longueur][largeur].isDrapeau())
+                notifyFlag(longueur, largeur);
+            if(!jeu.getP().getEtatIdPlateau()[longueur][largeur].isDrapeau())
+                notifyUnFlag(longueur, largeur);
         } 
-        System.out.println("Jeu fini!!!!!!!!!");
         
     }
 
@@ -94,9 +91,9 @@ public class Modele extends Observable{
         this.listObserver.add(obs);
     }
     
-    public void notifyObserver(String str) {
+    public void notifyObserver() {
         for(Observer obs : listObserver)
-            obs.update(str);
+            obs.update();
     }
     
     public void notifyObserver(Boolean fini) {
@@ -106,6 +103,11 @@ public class Modele extends Observable{
     public void notifyFlag(int longueur, int largeur) {
         for(Observer obs : listObserver)
             obs.updateCase(longueur, largeur);
+    }
+    
+    public void notifyUnFlag(int longueur, int largeur) {
+        for(Observer obs : listObserver)
+            obs.updateUnFlag(longueur, largeur);
     }
     
     public void notifyBombe(int longueur, int largeur, Boolean mort) {

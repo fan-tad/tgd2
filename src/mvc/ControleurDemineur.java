@@ -10,26 +10,22 @@ package mvc;
  * @author tfano_000
  */
 public class ControleurDemineur extends Controleur{
-    int i = 0;
     public ControleurDemineur(Modele m){
         super(m);
+        
     }
     
     public void ClickGauche(int x, int y){
-        if(!m.getJeu().isJeuCommence() && i == 0){
-            System.out.println("entree commence");
+        if(!m.getJeu().isJeuCommence()){
             m.JeuCommence();
-            i++;
         }
         m.jouerDemineur(x, y);
         m.JeuFini();
     }
     
     public void ClickDroit(int x, int y){
-        if(!m.getJeu().isJeuCommence() && i == 0){
-            System.out.println("entree commence");
+        if(!m.getJeu().isJeuCommence()){
             m.JeuCommence();
-            i++;
         }
         m.ajoutDrapeau(x, y);
     }

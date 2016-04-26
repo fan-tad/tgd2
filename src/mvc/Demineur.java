@@ -173,11 +173,9 @@ public class Demineur implements Observer{
                                                     public void handle(MouseEvent event) {
                                                         if(MouseButton.PRIMARY.equals(event.getButton())){
                                                             C.ClickGauche(longue, large);
-                                                            System.out.println("Click Gauche");
                                                         }
                                                         else if(MouseButton.SECONDARY.equals(event.getButton())){
                                                             C.ClickDroit(longue, large);
-                                                            System.out.println("Click Droite");
                                                         }
                                                     }
                                                 });
@@ -325,7 +323,7 @@ public class Demineur implements Observer{
     }
 
     @Override
-    public void update(String str) {
+    public void update() {
         for(int i=0; i<C.m.getJeu().getP().getLongueur();i++){
             for(int j=0; j<C.m.getJeu().getP().getLargeur();j++){
                 plateau[j*C.m.getJeu().getP().getLongueur()+i].setText(C.m.getPl().getEtatIdPlateau()[i][j].getValue());
@@ -349,20 +347,18 @@ public class Demineur implements Observer{
     
     @Override
     public void updateCase(int longueur, int largeur) {
-        if(C.m.getPl().getEtatIdPlateau()[longueur][largeur].isDrapeau()){
-            System.out.println("dev true");
-            ImageView ivf = new ImageView();
-            Image imagef = new Image("ressources/red_flag.png");
-            ivf.setImage(imagef);
-            ivf.setFitWidth(20);
-            ivf.setFitHeight(25);
-            ivf.setPreserveRatio(false);
-            plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(ivf);
-        }
-        else{
-            System.out.println("dev false");
-            plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(null);
-        }
+        ImageView ivf = new ImageView();
+        Image imagef = new Image("ressources/red_flag.png");
+        ivf.setImage(imagef);
+        ivf.setFitWidth(20);
+        ivf.setFitHeight(25);
+        ivf.setPreserveRatio(false);
+        plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(ivf);
+    }
+    
+    @Override
+    public void updateUnFlag(int longueur, int largeur) {
+        plateau[largeur*C.m.getJeu().getP().getLongueur()+longueur].setGraphic(null);
     }
     
     @Override

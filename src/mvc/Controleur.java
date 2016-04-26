@@ -28,7 +28,6 @@ public abstract class Controleur {
         btnR.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //m.jeu.getP().reinitialise();
                 stage.close();
                 p.getChildren().clear();
                 stage.setScene(scene);
@@ -46,24 +45,6 @@ public abstract class Controleur {
                 stage.close();
 
             }
-        });
-    }
-
-    void modeleNotify(Button []plateau, Modele m){
-        m.addObserver(new Observer() {
-            
-            @Override
-            public void update(Observable o, Object arg) {
-                for(int i=0; i<m.getJeu().getP().getLongueur();i++){
-                    for(int j=0; j<m.getJeu().getP().getLargeur();j++){
-                        plateau[j*m.getJeu().getP().getLongueur()+i].setText(m.getPl().getEtatIdPlateau()[i][j].getValue());
-                        if(m.getPl().getEtatIdPlateau()[i][j].isDevoilee()){
-                            plateau[j*m.getJeu().getP().getLongueur()+i].getStyleClass().add("case-uncovered");
-                        }
-                    }
-                }
-            }
-
         });
     }
     

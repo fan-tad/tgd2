@@ -10,8 +10,9 @@ package mvc;
  * @author tfano_000
  */
 public interface Observer {
-    public void update(String str);
+    public void update();
     public void update(Boolean fini);
     public void updateBombe(int x, int y, boolean mort);
     public void updateCase(int x, int y);
+    public void updateUnFlag(int x, int y);
 }
