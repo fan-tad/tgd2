@@ -160,7 +160,7 @@ public class Demineur implements Observer{
                 rootJ.getStyleClass().add("jeu");
                 rootJ.setVgap(2);
                 rootJ.setHgap(2); 
-                rootJ.getChildren().removeAll();
+                rootJ.getChildren().clear();
                 
                 for(int i=0; i<longueur; i++){
                     for(int j=0; j<largeur; j++){
@@ -182,106 +182,6 @@ public class Demineur implements Observer{
                                                     }
                                                 });
                             rootJ.add(plateau[j*longueur+i], j,i);
-                            
-                            
-                            
-                            
-                            
-                            /*plateau[j*longueur+i].setOnMouseClicked(new EventHandler<MouseEvent>(){
-                                
-                                @Override
-                                public void handle(MouseEvent event) {
-                                    if(C.m.getJeu().isJeuFini() == false){
-                                       getTicker().play();
-                                       if(MouseButton.PRIMARY.equals(event.getButton())){
-                                          C.m.jouerDemineur(longue, large);
-                                          if(C.m.getJeu().getP().getEtatIdPlateau()[longue][large].getBombe())
-                                          {
-                                            ImageView ivb = new ImageView();
-                                            Image imageb = new Image("ressources/bomb2.png");
-                                            ivb.setImage(imageb);
-                                            ivb.setFitWidth(30);
-                                            ivb.setFitHeight(35);
-                                            ivb.setPreserveRatio(false);
-                                            plateau[large*longueur+longue].setGraphic(ivb);
-                                            getTicker().stop();
-                                          }
-                                        
-                                        }
-                                        if(MouseButton.SECONDARY.equals(event.getButton()))
-                                        {
-                                            if(!C.m.getJeu().getP().getEtatIdPlateau()[longue][large].isDrapeau())
-                                            {
-                                                if(!C.m.getJeu().getP().getEtatIdPlateau()[longue][large].isDevoilee()){
-                                                    C.m.getJeu().getP().getEtatIdPlateau()[longue][large].setDrapeau();
-
-                                                    ImageView ivf = new ImageView();
-                                                    Image imagef = new Image("ressources/red_flag.png");
-                                                    ivf.setImage(imagef);
-                                                    ivf.setFitWidth(30);
-                                                    ivf.setFitHeight(30);
-                                                    ivf.setPreserveRatio(false);
-                                                    plateau[large*longueur+longue].setGraphic(ivf);
-                                                }  
-                                            }
-                                            else
-                                            {
-                                                C.m.getJeu().getP().getEtatIdPlateau()[longue][large].setDrapeau();
-                                                plateau[large*longueur+longue].setGraphic(null);
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        
-                                        rootJ.getChildren().clear();
-                                        C.m.getJeu().getP().reinitialise();
-                                        ImageView ivS = new ImageView();
-                                        Text looser = new Text();
-                
-                                        if(C.m.getJeu().isPlayerMort())
-                                        {
-                                            Image imageS = new Image("ressources/skull.png");
-                                            ivS.setImage(imageS);
-                                            ivS.setFitWidth(200);
-                                            ivS.setPreserveRatio(true);
-                                            ivS.setSmooth(true);
-                                            ivS.setCache(true);
-                                            looser.setText("Vous avez perdu! \n Voulez-vous rejouer?");
-                                        }
-                                        else
-                                        {
-                                            getTicker().stop();
-                                            Image imageS = new Image("ressources/victory.png");
-                                            ivS.setImage(imageS);
-                                            ivS.setFitWidth(200);
-                                            ivS.setPreserveRatio(true);
-                                            ivS.setSmooth(true);
-                                            ivS.setCache(true);
-                                            looser.setText("Vous avez gagné! \n Voulez-vous rejouer?");
-                                        }
-                                        looser.getStyleClass().add("looser");
-                                        
-                                        Button btnQ = new Button();
-                                        btnQ.setText("NON");
-                                        btnQ.getStyleClass().add("btn");
-                                        C.NonBouton(btnQ, primaryStage);
-                                        
-                                        Button btnR = new Button();
-                                        btnR.setText("OUI");
-                                        btnR.getStyleClass().add("btn");
-                                        C.OuiBouton(btnR, border, scene, primaryStage); 
-                                        C.m.getJeu().setJeuFini(false);
-                                        C.m.getJeu().getP().setNbNonDevoilee(C.m.getJeu().getP().getLongueur() * C.m.getJeu().getP().getLargeur());
-                                        rootJ.getChildren().addAll(ivS, looser, btnQ, btnR);
-                                        rootJ.setPadding(new Insets(20,0,0,150)); 
-                                        rootJ.setConstraints(looser, 3, 5);
-                                        rootJ.setConstraints(ivS, 2, 5);
-                                        rootJ.setConstraints(btnQ, 3, 25);
-                                        rootJ.setConstraints(btnR, 2, 25); 
-                                    }
-                                }
-                            }); */
                             
                             btnQuitter = new Button();
                             btnQuitter.setText("NON");
